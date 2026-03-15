@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Event Manager
 
-## Getting Started
+Привет! Это приложение **Event Manager** — удобный инструмент для управления вашими мероприятиями (конференциями, вебинарами и встречами). Я разрабатывал его как тестовое задание, стараясь показать не только базовые CRUD-операции, но и приятный опыт использования (UX/UI).
 
-First, run the development server:
+## Что внутри? Основные фичи
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Полный контроль над мероприятиями (CRUD)**:
+  Вы можете создавать новые события, просматривать их в виде красивых карточек, редактировать детали, если планы изменились, и удалять те, которые больше не актуальны.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Сортировка и Фильтрация**:
+  Мероприятий может быть много! Поэтому я добавил поиск по названию или описанию, фильтры по категориям (Конференция/Вебинар/Встреча) и статусам (Запланировано/Завершено). Также можно сортировать карточки по дате и алфавиту.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Динамическая пагинация**:
+  События выводятся по 6 штук на страницу. Пагинация плавно подстраивается под все ваши фильтры и поисковые запросы.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Избранное**:
+  Добавил простую и приятную функцию: кликаете на сердечко, и мероприятие улетает на отдельную вкладку "Избранное", чтобы самое важное всегда было под рукой.
 
-## Learn More
+- **Экспорт в JSON**:
+  Если вам нужно сохранить данные локально или передать их, есть кнопка "Экспорт JSON", которая выгрузит все текущие мероприятия в удобный файл.
 
-To learn more about Next.js, take a look at the following resources:
+- **Premium UI (Light Glassmorphism)**:
+  Вместо скучного минимализма я реализовал современный дизайн с эффектами матового стекла (backdrop-blur), мягкими тенями, градиентами и аккуратными микро-анимациями (hover, клики, пульсирующие статусы). Приложение ощущается "живым".
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Строгая валидация**:
+  Формы не дадут вам отправить пустое название или неправильную дату. Обработка ошибок происходит до попытки сохранить данные.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠 Какие технологии использовались?
 
-## Deploy on Vercel
+Я старался использовать современный и надежный стек, который подходит для production:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js 14+**: основа приложения.
+- **Tailwind CSS**: для стилизации. Никаких готовых UI-библиотек компонентов, все карточки, кнопки и модалки написаны вручную, чтобы полностью контролировать дизайн.
+- **Zustand + LocalStorage**: для управления состоянием. Он легковесный, простой и позволяет сохранять данные прямо в браузере, чтобы ничего не потерялось после обновления страницы.
+- **React Hook Form + Zod**: для работы с формами и строгой валидации данных.
+- **Lucide React**: стильные и минималистичные иконки.
+- **TypeScript**: для надежности и безопасности кода.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Как запустить локально?
+
+1. Откройте терминал в папке проекта.
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
+3. Запустите сервер для разработки:
+   ```bash
+   npm run dev
+   ```
+4. Откройте в браузере [http://localhost:3000](http://localhost:3000)
+
