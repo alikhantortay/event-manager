@@ -23,7 +23,7 @@ export default function Navbar() {
                 <Calendar className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-                EventManager
+                Event Manager
               </span>
             </Link>
             <div className="hidden sm:ml-10 sm:flex sm:space-x-2">

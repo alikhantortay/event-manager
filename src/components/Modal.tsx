@@ -42,8 +42,8 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
         ref={modalRef}
         className="relative bg-white/90 backdrop-blur-xl border border-black/5 rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] w-full max-w-lg overflow-hidden flex flex-col max-h-[calc(100dvh-2rem)] sm:max-h-[90vh] animate-in fade-in zoom-in-95 duration-200"
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b border-black/5 bg-slate-50/50">
-          <h2 className="text-xl font-bold text-slate-800 tracking-tight">{title}</h2>
+        <div className="flex items-center justify-between p-4 sm:px-6 sm:py-5 border-b border-black/5 bg-slate-50/50 shrink-0">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">{title}</h2>
           <button
             onClick={onClose}
             className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-200/50 rounded-full transition-colors cursor-pointer"
@@ -52,7 +52,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
           </button>
         </div>
         
-        <div className="px-6 py-5 overflow-y-auto">
+        <div className="p-4 sm:p-6 overflow-y-auto">
           {children}
         </div>
       </div>
