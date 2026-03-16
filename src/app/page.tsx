@@ -38,7 +38,6 @@ export default function Home() {
     if (editingEvent) {
       updateEvent(editingEvent.id, data);
     } else {
-      // Find the max numeric ID to create an incremental ID
       const maxId = events.reduce((max, event) => {
         const numId = parseInt(event.id);
         return !isNaN(numId) && numId > max ? numId : max;
@@ -78,20 +77,20 @@ export default function Home() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500 relative z-10">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
+        <div className="w-full sm:w-auto">
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-purple-700">Мероприятия</h1>
           <p className="text-slate-500 text-sm mt-1">Управляйте всеми вашими событиями в одном месте</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
             onClick={exportToJson}
-            className="px-4 py-2 text-sm font-medium text-slate-700 bg-white/70 backdrop-blur-md border border-black/5 rounded-xl hover:bg-slate-50 transition-all duration-200 cursor-pointer"
+            className="flex-1 sm:flex-none justify-center text-center px-4 py-2.5 sm:py-2 text-sm font-medium text-slate-700 bg-white/70 backdrop-blur-md border border-black/5 rounded-xl hover:bg-slate-50 transition-all duration-200 cursor-pointer"
           >
             Экспорт JSON
           </button>
           <button
             onClick={() => { setEditingEvent(null); setIsFormOpen(true); }}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 shadow-[0_0_20px_rgba(99,102,241,0.2)] hover:shadow-[0_0_25px_rgba(99,102,241,0.4)] hover:-translate-y-0.5 cursor-pointer"
+            className="flex-1 sm:flex-none justify-center text-center inline-flex items-center gap-2 px-4 py-2.5 sm:py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 shadow-[0_0_20px_rgba(99,102,241,0.2)] hover:shadow-[0_0_25px_rgba(99,102,241,0.4)] hover:-translate-y-0.5 cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Добавить
@@ -100,7 +99,7 @@ export default function Home() {
       </div>
 
       <div className="bg-white/70 backdrop-blur-xl p-5 rounded-2xl border border-black/5 shadow-sm shadow-black/5 space-y-4">
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-4">
           <div className="relative flex-1">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
@@ -112,37 +111,39 @@ export default function Home() {
             />
           </div>
           
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-slate-400" />
+          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+            <div className="grid grid-cols-2 sm:flex sm:flex-row gap-3 w-full sm:w-auto">
+              <div className="relative w-full sm:w-auto">
+                <SlidersHorizontal className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                <select
+                  value={filterCategory}
+                  onChange={(e) => setFilterCategory(e.target.value as any)}
+                  className="w-full sm:w-auto py-2.5 pl-9 pr-8 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 text-slate-700 appearance-none transition-all cursor-pointer shadow-sm hover:bg-slate-50"
+                >
+                  <option value="All">Все категории</option>
+                  <option value="Конференция">Конференция</option>
+                  <option value="Вебинар">Вебинар</option>
+                  <option value="Встреча">Встреча</option>
+                </select>
+              </div>
+              
               <select
-                value={filterCategory}
-                onChange={(e) => setFilterCategory(e.target.value as any)}
-                className="py-2.5 pl-3 pr-8 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 text-slate-700 appearance-none transition-all cursor-pointer shadow-sm hover:bg-slate-50"
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value as any)}
+                className="w-full sm:w-auto py-2.5 pl-3 pr-8 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 text-slate-700 appearance-none transition-all cursor-pointer shadow-sm hover:bg-slate-50"
               >
-                <option value="All">Все категории</option>
-                <option value="Конференция">Конференция</option>
-                <option value="Вебинар">Вебинар</option>
-                <option value="Встреча">Встреча</option>
+                <option value="All">Все статусы</option>
+                <option value="Запланировано">Запланировано</option>
+                <option value="Завершено">Завершено</option>
               </select>
             </div>
-            
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value as any)}
-              className="py-2.5 pl-3 pr-8 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 text-slate-700 appearance-none transition-all cursor-pointer shadow-sm hover:bg-slate-50"
-            >
-              <option value="All">Все статусы</option>
-              <option value="Запланировано">Запланировано</option>
-              <option value="Завершено">Завершено</option>
-            </select>
 
-            <div className="flex items-center gap-2 border-l border-slate-200 pl-3">
-              <ArrowUpDown className="w-4 h-4 text-slate-400" />
+            <div className="relative w-full sm:w-auto mt-1 sm:mt-0 sm:border-l border-slate-200 sm:pl-3">
+              <ArrowUpDown className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="py-2.5 pl-3 pr-8 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 text-slate-700 appearance-none transition-all cursor-pointer shadow-sm hover:bg-slate-50"
+                className="w-full sm:w-auto py-2.5 pl-9 sm:pl-9 pr-8 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 text-slate-700 appearance-none transition-all cursor-pointer shadow-sm hover:bg-slate-50"
               >
                 <option value="dateA">Сначала старые</option>
                 <option value="dateD">Сначала новые</option>

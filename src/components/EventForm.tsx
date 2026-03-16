@@ -94,7 +94,7 @@ export default function EventForm({ initialData, onSubmit, onCancel }: EventForm
         {errors.date && <p className="text-rose-500 text-xs mt-1.5 font-medium">{errors.date.message}</p>}
       </div>
 
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Категория</label>
           <select
